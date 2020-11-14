@@ -1,0 +1,39 @@
+{
+	"name": "@yevheni/db",
+	"version": "0.0.1",
+	"description": "MongoDB (Mongoose) helper class",
+	"main": "src/db.js",
+	"types": "src/db.d.ts",
+	"scripts": {
+		"build": "tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/yevheni/db.git"
+	},
+	"keywords": [
+		"db",
+		"mongodb",
+		"mongoose",
+		"helper",
+		"typescript",
+		"ts"
+	],
+	"author": "Yevhenii Korchak",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/yevheni/db/issues"
+	},
+	"homepage": "https://github.com/yevheni/db#readme",
+	"dependencies": {
+		"@yevheni/logg": "^1.0.3",
+		"mongoose": "^5.10.14",
+		"shortid": "^2.2.16"
+	},
+	"devDependencies": {
+		"@types/mongoose": "^5.10.0",
+		"@types/shortid": "0.0.29",
+		"typescript": "^4.0.5"
+	}
+}

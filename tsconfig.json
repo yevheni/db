@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"module": "CommonJS",
+		"target": "ES6",
+		"removeComments": false,
+		"sourceMap": true,
+		"declaration": true
+	},
+	"files": [
+		"src/db.ts"
+	]
+}
