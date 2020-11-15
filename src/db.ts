@@ -2,15 +2,15 @@ import {Connection, ConnectionOptions, createConnection, Model, Schema, SchemaDe
 import {logg} from "@yevheni/logg";
 import shortid = require("shortid");
 
-interface IObject {
+export interface IObject {
     [key: string]: any
 }
-interface MongoConfig extends IObject {
+export interface MongoConfig extends IObject {
     name?: string,
     url: string,
     options?: ConnectionOptions,
 }
-interface MongoCopyOptions {
+export interface MongoCopyOptions {
     from: string,
     to: string,
     filter: IObject,

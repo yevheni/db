@@ -1,13 +1,13 @@
 import { Connection, ConnectionOptions, Model, SchemaDefinition, Document } from "mongoose";
-interface IObject {
+export interface IObject {
     [key: string]: any;
 }
-interface MongoConfig extends IObject {
+export interface MongoConfig extends IObject {
     name?: string;
     url: string;
     options?: ConnectionOptions;
 }
-interface MongoCopyOptions {
+export interface MongoCopyOptions {
     from: string;
     to: string;
     filter: IObject;
@@ -25,4 +25,3 @@ export declare class Mongo {
     put(model: string, docs: Document[], update?: {}): Promise<import("mongodb").BulkWriteOpResultObject>;
     copy(options: MongoCopyOptions): Promise<void>;
 }
-export {};
