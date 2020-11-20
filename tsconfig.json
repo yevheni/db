@@ -4,7 +4,8 @@
 		"target": "ES6",
 		"removeComments": false,
 		"sourceMap": true,
-		"declaration": true
+		"declaration": true,
+		"allowSyntheticDefaultImports": true
 	},
 	"files": [
 		"src/db.ts"

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Mongo = void 0;
 const mongoose_1 = require("mongoose");
 const logg_1 = require("@yevheni/logg");
-const shortid = require("shortid");
+const shortid_1 = require("shortid");
 class Mongo {
     constructor(config) {
         this.models = {};
@@ -21,39 +21,40 @@ class Mongo {
     }
     connect() {
         const { name, url, options } = this.config;
-        const initDB = () => {
-            this.connection = mongoose_1.createConnection(url, options);
-            this.connection.on("connected", () => {
-                logg_1.logg.fuchsia(`Database connected ${name ? `(${name})` : ``}`);
-            });
-            this.connection.on("disconnected", () => {
-                logg_1.logg.red(`Database disconnected ${name ? `(${name})` : ``}`);
-            });
-            this.connection.on("reconnected", () => {
-                logg_1.logg.red(`Database reconnected ${name ? `(${name})` : ``}`);
-            });
-            this.connection.on("error", (err) => {
-                logg_1.logg.red(`!!!!! Database error ${name ? `(${name})` : ``} !!!!!`);
-                console.error(err);
-                this.connection.close(true).then(() => {
-                    initDB();
-                }).catch(err => console.error(err));
-            });
-            this.connection.on("reconnectFailed", () => {
-                logg_1.logg.red(`Database reconnectFailed ${name ? `(${name})` : ``}`);
-                this.connection.close(true).then(() => {
-                    initDB();
-                }).catch(err => console.error(err));
-            });
-            // return connection;
-        };
-        initDB();
+        // const initDB = () => {
+        this.connection = mongoose_1.createConnection(url, options);
+        this.connection.on("connected", () => {
+            logg_1.logg.fuchsia(`Database connected ${name ? `(${name})` : ``}`);
+        });
+        this.connection.on("disconnected", () => {
+            logg_1.logg.red(`Database disconnected ${name ? `(${name})` : ``}`);
+        });
+        this.connection.on("reconnected", () => {
+            logg_1.logg.red(`Database reconnected ${name ? `(${name})` : ``}`);
+        });
+        this.connection.on("error", (err) => {
+            logg_1.logg.red(`!!!!! Database error ${name ? `(${name})` : ``} !!!!!`);
+            console.error(err);
+            // this.connection.close(true).then(() => {
+            //     initDB();
+            // }).catch(err => console.error(err));
+        });
+        this.connection.on("reconnectFailed", () => {
+            logg_1.logg.red(`Database reconnectFailed ${name ? `(${name})` : ``}`);
+            // this.connection.close(true).then(() => {
+            //     initDB();
+            // }).catch(err => console.error(err));
+        });
+        // return connection;
+        // };
+        //
+        // initDB();
     }
     model(name, schema = {}) {
         if (!this.models[name]) {
             const schemaCreated = new mongoose_1.Schema(Object.assign({ "_id": {
                     type: String,
-                    default: shortid.generate,
+                    default: shortid_1.default.generate,
                 }, "created": {
                     type: Number,
                 }, "updated": {
