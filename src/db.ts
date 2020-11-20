@@ -1,6 +1,6 @@
 import {Connection, ConnectionOptions, createConnection, Model, Schema, SchemaDefinition, Document} from "mongoose";
 import {logg} from "@yevheni/logg";
-import shortid from "shortid";
+import * as shortid from "shortid";
 
 export interface IObject {
 	[key: string]: any

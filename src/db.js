@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Mongo = void 0;
 const mongoose_1 = require("mongoose");
 const logg_1 = require("@yevheni/logg");
-const shortid_1 = require("shortid");
+const shortid = require("shortid");
 class Mongo {
     constructor(config) {
         this.models = {};
@@ -54,7 +54,7 @@ class Mongo {
         if (!this.models[name]) {
             const schemaCreated = new mongoose_1.Schema(Object.assign({ "_id": {
                     type: String,
-                    default: shortid_1.default.generate,
+                    default: shortid.generate,
                 }, "created": {
                     type: Number,
                 }, "updated": {

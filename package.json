@@ -1,6 +1,6 @@
 {
 	"name": "@yevheni/db",
-	"version": "1.1.7",
+	"version": "1.1.8",
 	"description": "MongoDB (Mongoose) helper class",
 	"main": "src/db.js",
 	"types": "src/db.d.ts",
