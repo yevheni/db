@@ -70,7 +70,23 @@ class Mongo {
                     "currentTime": () => Date.now(),
                 },
             });
-            this.models[name] = this.connection.model(name, schemaCreated);
+            /** Set deleteManySafe */
+            const model = this.connection.model(name, schemaCreated);
+            model.deleteManySafe = (query = {}) => __awaiter(this, void 0, void 0, function* () {
+                const nameDeleted = `${name}_deleted`;
+                yield this.copy({
+                    from: name,
+                    to: nameDeleted,
+                    filter: query,
+                    update: {
+                        _deleted: Date.now(),
+                    },
+                    limit: 100
+                });
+                const result = yield model.deleteMany(query);
+                return result;
+            });
+            this.models[name] = model;
         }
         return this.models[name];
     }

@@ -1,4 +1,4 @@
-import { Connection, ConnectionOptions, Model, SchemaDefinition, Document } from "mongoose";
+import { Connection, ConnectionOptions, Model, SchemaDefinition, Document, FilterQuery } from "mongoose";
 export interface IObject {
     [key: string]: any;
 }
@@ -14,6 +14,13 @@ export interface MongoCopyOptions {
     update?: IObject;
     skip?: number;
     limit?: number;
+}
+export interface IModel extends Model<Document> {
+    deleteManySafe: (query: FilterQuery<Document>) => Promise<{
+        n?: number;
+        ok?: number;
+        deletedCount?: number;
+    }>;
 }
 export declare class Mongo {
     config: MongoConfig;

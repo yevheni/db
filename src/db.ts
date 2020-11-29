@@ -1,17 +1,24 @@
-import {Connection, ConnectionOptions, createConnection, Model, Schema, SchemaDefinition, Document} from "mongoose";
+import {
+	Connection,
+	ConnectionOptions,
+	createConnection,
+	Model,
+	Schema,
+	SchemaDefinition,
+	Document,
+	FilterQuery, Query
+} from "mongoose";
 import {logg} from "@yevheni/logg";
 import * as shortid from "shortid";
 
 export interface IObject {
 	[key: string]: any
 }
-
 export interface MongoConfig extends IObject {
 	name?: string,
 	url: string,
 	options?: ConnectionOptions,
 }
-
 export interface MongoCopyOptions {
 	from: string,
 	to: string,
@@ -19,6 +26,13 @@ export interface MongoCopyOptions {
 	update?: IObject,
 	skip?: number,
 	limit?: number,
+}
+export interface IModel extends Model<Document> {
+	deleteManySafe: (query: FilterQuery<Document>) => Promise<{
+		n?: number,
+		ok?: number,
+		deletedCount?: number,
+	}>
 }
 
 export class Mongo {
@@ -94,7 +108,28 @@ export class Mongo {
 				},
 			});
 
-			this.models[name] = this.connection.model(name, schemaCreated);
+			/** Set deleteManySafe */
+			const model = this.connection.model(name, schemaCreated) as IModel;
+
+			model.deleteManySafe = async (query: FilterQuery<Document> = {}) => {
+				const nameDeleted = `${name}_deleted`;
+
+				await this.copy({
+					from: name,
+					to: nameDeleted,
+					filter: query,
+					update: {
+						_deleted: Date.now(),
+					},
+					limit: 100
+				});
+
+				const result = await model.deleteMany(query);
+
+				return result;
+			};
+
+			this.models[name] = model;
 		}
 
 		return this.models[name];
