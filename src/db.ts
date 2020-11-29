@@ -82,7 +82,7 @@ export class Mongo {
 		// initDB();
 	}
 
-	model(name: string, schema: SchemaDefinition = {}): Model<Document> {
+	model(name: string, schema: SchemaDefinition = {}): IModel {
 		if (!this.models[name]) {
 			const schemaCreated = new Schema({
 				"_id": {

@@ -28,7 +28,7 @@ export declare class Mongo {
     models: IObject;
     constructor(config: MongoConfig);
     connect(): void;
-    model(name: string, schema?: SchemaDefinition): Model<Document>;
+    model(name: string, schema?: SchemaDefinition): IModel;
     put(model: string, docs: Document[], update?: {}): Promise<import("mongodb").BulkWriteOpResultObject>;
     copy(options: MongoCopyOptions): Promise<void>;
 }
