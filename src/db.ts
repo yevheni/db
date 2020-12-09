@@ -6,9 +6,8 @@ import {
 	Schema,
 	SchemaDefinition,
 	Document,
-	FilterQuery, Query
+	FilterQuery
 } from "mongoose";
-import {logg} from "@yevheni/logg";
 import * as shortid from "shortid";
 
 export interface IObject {
@@ -52,30 +51,30 @@ export class Mongo {
 
 		// const initDB = () => {
 		this.connection = createConnection(url, options);
-		this.connection.on("connected", () => {
-			logg.fuchsia(`Database connected ${name ? `(${name})` : ``}`);
-		});
-		this.connection.on("disconnected", () => {
-			logg.red(`Database disconnected ${name ? `(${name})` : ``}`);
-		});
-		this.connection.on("reconnected", () => {
-			logg.red(`Database reconnected ${name ? `(${name})` : ``}`);
-		});
-		this.connection.on("error", (err) => {
-			logg.red(`!!!!! Database error ${name ? `(${name})` : ``} !!!!!`);
-			console.error(err);
-
-			// this.connection.close(true).then(() => {
-			//     initDB();
-			// }).catch(err => console.error(err));
-		});
-		this.connection.on("reconnectFailed", () => {
-			logg.red(`Database reconnectFailed ${name ? `(${name})` : ``}`);
-
-			// this.connection.close(true).then(() => {
-			//     initDB();
-			// }).catch(err => console.error(err));
-		});
+		// this.connection.on("connected", () => {
+		// 	logg.fuchsia(`Database connected ${name ? `(${name})` : ``}`);
+		// });
+		// this.connection.on("disconnected", () => {
+		// 	logg.red(`Database disconnected ${name ? `(${name})` : ``}`);
+		// });
+		// this.connection.on("reconnected", () => {
+		// 	logg.red(`Database reconnected ${name ? `(${name})` : ``}`);
+		// });
+		// this.connection.on("error", (err) => {
+		// 	logg.red(`!!!!! Database error ${name ? `(${name})` : ``} !!!!!`);
+		// 	console.error(err);
+		//
+		// 	// this.connection.close(true).then(() => {
+		// 	//     initDB();
+		// 	// }).catch(err => console.error(err));
+		// });
+		// this.connection.on("reconnectFailed", () => {
+		// 	logg.red(`Database reconnectFailed ${name ? `(${name})` : ``}`);
+		//
+		// 	// this.connection.close(true).then(() => {
+		// 	//     initDB();
+		// 	// }).catch(err => console.error(err));
+		// });
 		// return connection;
 		// };
 		//
