@@ -13,10 +13,12 @@ exports.Mongo = void 0;
 const mongoose_1 = require("mongoose");
 const shortid = require("shortid");
 class Mongo {
-    constructor(config) {
+    constructor(config, connectOnInit = true) {
         this.models = {};
         this.config = config;
-        this.connect();
+        if (connectOnInit) {
+            this.connect();
+        }
     }
     connect() {
         const { name, url, options } = this.config;
@@ -139,6 +141,14 @@ class Mongo {
                 }
             });
             yield move(skip);
+        });
+    }
+    useDb(dbName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const clone = Object.assign({}, this);
+            Object.setPrototypeOf(clone, Mongo.prototype);
+            clone.connection = clone.connection.useDb(dbName);
+            return clone;
         });
     }
 }

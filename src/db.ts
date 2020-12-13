@@ -39,9 +39,12 @@ export class Mongo {
 	connection: Connection;
 	models: IObject = {};
 
-	constructor(config: MongoConfig) {
+	constructor(config: MongoConfig, connectOnInit = true) {
 		this.config = config;
-		this.connect();
+
+		if (connectOnInit) {
+			this.connect();
+		}
 	}
 
 	connect() {
@@ -197,5 +200,15 @@ export class Mongo {
 		};
 
 		await move(skip);
+	}
+
+	async useDb(dbName: string) {
+		const clone = Object.assign({}, this);
+
+		Object.setPrototypeOf(clone, Mongo.prototype);
+
+		clone.connection = clone.connection.useDb(dbName);
+
+		return clone;
 	}
 }
