@@ -26,7 +26,8 @@ export interface MongoCopyOptions {
 	skip?: number,
 	limit?: number,
 }
-export interface IModel extends Model<Document> {
+export interface IDocument extends Document, IObject {}
+export interface IModel extends Model<IDocument> {
 	deleteManySafe: (query: FilterQuery<Document>) => Promise<{
 		n?: number,
 		ok?: number,
