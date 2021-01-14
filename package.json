@@ -1,6 +1,6 @@
 {
 	"name": "@yevheni/db",
-	"version": "1.2.6",
+	"version": "1.2.7",
 	"description": "MongoDB (Mongoose) helper class",
 	"main": "src/db.js",
 	"types": "src/db.d.ts",
@@ -29,7 +29,7 @@
 	"homepage": "https://github.com/yevheni/db#readme",
 	"dependencies": {
 		"@yevheni/logg": "^1.0.3",
-		"mongoose": "^5.11.10",
+		"mongoose": "5.11.10",
 		"shortid": "^2.2.16"
 	},
 	"devDependencies": {
